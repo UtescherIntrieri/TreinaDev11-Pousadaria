@@ -1,0 +1,17 @@
+<h1><%= @inn.brand_name %></h1>
+<h2><%= @inn.description %> </h2>
+<div>
+  <strong>Endereço:</strong> <%= @inn.address %> - <%= @inn.neighborhood %>. <%= @inn.postal_code %>. <%= @inn.city %> - <%= @inn.state %> <br>
+  <strong>Telefone:</strong> <%= @inn.phone_number %> <br>
+  <strong>E-mail:</strong> <%= @inn.email %> <br>
+  <strong>Check_in:</strong> <%= @inn.check_in.strftime("%H:%M") %> - <strong>Check_out:</strong> <%= @inn.check_out.strftime("%H:%M") %> <br>
+  <strong>pet:</strong> <%= @inn.pet_friendly %> <br>
+  <strong>Politicas de Uso:</strong> <%= @inn.usage_policy %> <br>
+  <strong>Métodos de pagamento:</strong> <%= @inn.payment_methods %> <br>
+  <strong>Empresa:</strong> <%= @inn.corporate_names %> - <strong>CNPJ:</strong> <%= @inn.registration_number %> <br>
+</div>
+
+
+<%= button_to 'Alterar Status', release_movie_path, { method: 'patch' } %>
+
+<div><%= link_to('Voltar', root_path) %></div>

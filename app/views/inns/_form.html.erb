@@ -1,0 +1,70 @@
+<%= form_with(model: @inn) do |f| %>
+  <div>
+    <%= f.label :corporate_names%>
+    <%= f.text_field :corporate_names %>
+  </div>
+  <div>
+    <%= f.label :brand_name%>
+    <%= f.text_field :brand_name %>
+  </div>
+  <div>
+    <%= f.label :registration_number%>
+    <%= f.text_field :registration_number %>
+  </div>
+  <div>
+    <%= f.label :phone_number%>
+    <%= f.text_field :phone_number %>
+  </div>
+  <div>
+    <%= f.label :email%>
+    <%= f.text_field :email %>
+  </div>
+  <div>
+    <%= f.label :address%>
+    <%= f.text_field :address %>
+  </div>
+  <div>
+    <%= f.label :neighborhood%>
+    <%= f.text_field :neighborhood %>
+  </div>
+  <div>
+    <%= f.label :city%>
+    <%= f.text_field :city %>
+  </div>
+  <div>
+    <%= f.label :state%>
+    <%= f.text_field :state %>
+  </div>
+  <div>
+    <%= f.label :postal_code%>
+    <%= f.text_field :postal_code %>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+  <div>
+    <%= f.label :payment_methods %>
+    <%= f.text_field :payment_methods %>
+  </div>
+  <div>
+    <%= f.label :pet_friendly%>
+    <%= f.check_box :pet_friendly, {}, "true", "false" %>
+
+</div>
+  <div>
+    <%= f.label :usage_policy%>
+    <%= f.text_area :usage_policy %>
+  </div>
+  <div>
+    <%= f.label :check_in%>
+    <%= f.time_field :check_in %>
+  </div>
+  <div>
+    <%= f.label :check_out%>
+    <%= f.time_field :check_out %>
+  </div>
+  <div>
+    <%= f.submit 'Enviar' %>
+  </div>
+<% end %>

@@ -1,0 +1,24 @@
+<h1>Pousadaria</h1>
+
+<section id="inns">
+  <h2>Pousadas</h2>
+  <div>
+    <%= link_to("Cadastrar Pousada", new_inn_path)%>
+  </div>
+  <% @inns.each do |inn| %>
+    <div>
+      <h3><%= link_to(inn.brand_name, inn) %></h3>
+      <h4><%= inn.description %></h4>
+      <dl>
+      <dt>Endereço:</dt>
+      <dd><%= inn.address %> - <%= inn.neighborhood %>. <%= inn.city %> - <%= inn.state %></dd>
+      <dt>Telefone:</dt>
+      <dd><%= inn.phone_number %></dd>
+      </dl>
+    </div>
+  <% end %>
+  
+  <% if @inns.empty? %>
+    <p>Não existem pousadas cadastradas</p>
+  <% end %>
+</section>
