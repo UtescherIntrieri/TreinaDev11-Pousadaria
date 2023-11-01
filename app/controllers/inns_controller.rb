@@ -17,4 +17,14 @@ class InnsController < ApplicationController
       render 'new'
     end
   end
+
+  def activate
+    @inn = Inn.find(params[:id])
+    if @inn.status == 'inactive'
+      @inn.active!
+    else
+      @inn.inactive!
+    end
+    redirect_to inn_path(@inn.id)
+  end
 end

@@ -9,9 +9,10 @@
   <strong>Politicas de Uso:</strong> <%= @inn.usage_policy %> <br>
   <strong>Métodos de pagamento:</strong> <%= @inn.payment_methods %> <br>
   <strong>Empresa:</strong> <%= @inn.corporate_names %> - <strong>CNPJ:</strong> <%= @inn.registration_number %> <br>
+  <strong>Status:</strong> <%= @inn.status %> <br>
 </div>
 
 
-<%= button_to 'Alterar Status', release_movie_path, { method: 'patch' } %>
+<%= button_to 'Alterar Status', activate_inn_path, { method: 'patch' } %>
 
 <div><%= link_to('Voltar', root_path) %></div>
