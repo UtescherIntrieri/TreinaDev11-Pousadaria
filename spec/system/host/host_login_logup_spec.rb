@@ -70,12 +70,54 @@ describe 'Usuário faz login' do
     fill_in 'Confirme sua senha', with: '123456' 
     click_on 'Criar'
     visit root_path
-    expect(page).to have_current_path('/inns/new') 
     
     # Assert
     expect(page).to have_content('João') 
     expect(page).to have_content('Sair') 
     expect(page).not_to have_content('Entrar') 
     expect(page).to have_content('Cadastrar Pousada') 
+    expect(page).to have_current_path('/inns/new') 
+  end
+  
+  it 'pela tela de login' do
+    # Arrange
+    Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
+    
+    # Act
+    visit root_path
+    click_on 'Entrar'
+    fill_in 'E-mail', with: 'joao@gmail.com' 
+    fill_in 'Senha', with: '123456' 
+    within 'form' do
+      click_on 'Entrar'
+    end
+    
+    # Assert
+    expect(page).to have_content('João') 
+    expect(page).to have_content('Sair') 
+    expect(page).not_to have_content('Entrar') 
+    expect(page).to have_content('Cadastrar Pousada') 
+    expect(page).to have_current_path('/inns/new') 
+  end
+
+  it 'pela tela de login e faz logout' do
+    # Arrange
+    Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
+    
+    # Act
+    visit root_path
+    click_on 'Entrar'
+    fill_in 'E-mail', with: 'joao@gmail.com' 
+    fill_in 'Senha', with: '123456' 
+    within 'form' do
+      click_on 'Entrar'
+    end
+    click_on 'Sair'
+    
+    # Assert
+    expect(page).to have_content('Logout efetuado com sucesso.') 
+    expect(page).to have_content('Entrar') 
+    expect(page).not_to have_content('Sair') 
+    expect(page).to have_current_path('/') 
   end
 end

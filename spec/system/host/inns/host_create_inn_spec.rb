@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Usuário acessa /inns/new' do
+describe 'Host acessa /inns/new' do
   it 'e cria uma pousada com sucesso' do
     # Arrange
     Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
@@ -71,23 +71,23 @@ describe 'Usuário acessa /inns/new' do
     click_on 'Enviar'
     
     # Assert
-    expect(page).to have_content('Pousada não cadastrada.')
-    expect(page).to have_content('Verifique os erros abaixo:')
-    expect(page).to have_content('Empresa não pode ficar em branco')
-    expect(page).to have_content('Nome não pode ficar em branco')
-    expect(page).to have_content('CNPJ não pode ficar em branco')
-    expect(page).to have_content('Telefone não pode ficar em branco')
-    expect(page).to have_content('E-mail não pode ficar em branco')
-    expect(page).to have_content('Endereço não pode ficar em branco')
-    expect(page).to have_content('Bairro não pode ficar em branco')
-    expect(page).to have_content('Cidade não pode ficar em branco')
-    expect(page).to have_content('Estado não pode ficar em branco')
-    expect(page).to have_content('CEP não pode ficar em branco')
-    expect(page).to have_content('Descrição não pode ficar em branco')
-    expect(page).to have_content('Métodos de pagamento não pode ficar em branco')
-    expect(page).to have_content('Políticas de uso não pode ficar em branco')
-    expect(page).to have_content('Check-in não pode ficar em branco')
-    expect(page).to have_content('Check-out não pode ficar em branco')
+    expect(page).to have_content 'Pousada não cadastrada.'
+    expect(page).to have_content 'Verifique os erros abaixo:'
+    expect(page).to have_content 'Empresa não pode ficar em branco'
+    expect(page).to have_content 'Nome não pode ficar em branco'
+    expect(page).to have_content 'CNPJ não pode ficar em branco'
+    expect(page).to have_content 'Telefone não pode ficar em branco'
+    expect(page).to have_content 'E-mail não pode ficar em branco'
+    expect(page).to have_content 'Endereço não pode ficar em branco'
+    expect(page).to have_content 'Bairro não pode ficar em branco'
+    expect(page).to have_content 'Cidade não pode ficar em branco'
+    expect(page).to have_content 'Estado não pode ficar em branco'
+    expect(page).to have_content 'CEP não pode ficar em branco'
+    expect(page).to have_content 'Descrição não pode ficar em branco'
+    expect(page).to have_content 'Métodos de pagamento não pode ficar em branco'
+    expect(page).to have_content 'Políticas de uso não pode ficar em branco'
+    expect(page).to have_content 'Check-in não pode ficar em branco'
+    expect(page).to have_content 'Check-out não pode ficar em branco'
     expect(page).to have_current_path('/inns') 
     
   end
