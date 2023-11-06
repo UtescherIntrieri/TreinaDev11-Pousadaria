@@ -1,18 +1,59 @@
 <h1><%= @inn.brand_name %></h1>
 <h2><%= @inn.description %> </h2>
+
+<% if host_signed_in? && current_host.id == @inn.host_id %>
+<div><%= link_to('Editar', edit_inn_path) %></div>
+<% end %>
+
 <div>
   <strong>Endereço:</strong> <%= @inn.address %> - <%= @inn.neighborhood %>. <%= @inn.postal_code %>. <%= @inn.city %> - <%= @inn.state %> <br>
   <strong>Telefone:</strong> <%= @inn.phone_number %> <br>
   <strong>E-mail:</strong> <%= @inn.email %> <br>
   <strong>Check_in:</strong> <%= @inn.check_in.strftime("%H:%M") %> - <strong>Check_out:</strong> <%= @inn.check_out.strftime("%H:%M") %> <br>
-  <strong>pet:</strong> <%= @inn.pet_friendly %> <br>
+  <strong>Aceita pet:</strong> <%= @inn.pet_friendly %> <br>
   <strong>Politicas de Uso:</strong> <%= @inn.usage_policy %> <br>
   <strong>Métodos de pagamento:</strong> <%= @inn.payment_methods %> <br>
-  <strong>Empresa:</strong> <%= @inn.corporate_names %> - <strong>CNPJ:</strong> <%= @inn.registration_number %> <br>
+  <strong>Empresa:</strong> <%= @inn.corporate_name %> - <strong>CNPJ:</strong> <%= @inn.registration_number %> <br>
   <strong>Status:</strong> <%= @inn.status %> <br>
 </div>
 
+<% if host_signed_in? && current_host.id == @inn.host_id %>
+  <%= button_to 'Alterar Status', activate_inn_path, { method: 'patch' } %>
+<% end %>
 
-<%= button_to 'Alterar Status', activate_inn_path, { method: 'patch' } %>
+<h3>Quartos Disponíveis</h3>
+
+<% if host_signed_in? && current_host.id == @inn.host_id %>
+  <%= link_to("Cadastrar Quarto", new_inn_room_path(@inn.id))%>
+<% end %>
+
+<% @rooms.each do |room| %>
+    <div>
+      <h3><%= link_to(room.name, inn_room_path(@inn.id, room.id)) %></h3>
+      <h4><%= room.description %></h4>
+      <dl>
+      <dt>Capacidade:</dt>
+      <dd><%= room.capacity %> pessoas</dd>
+      <dt>Diária:</dt>
+      <dd>R$<%= room.price %></dd>
+      </dl>
+
+      <% if @adjusted_prices.where(room_id: room.id).any? %>
+        <h3>Preços especiais</h3>
+
+        <% @adjusted_prices.where(room_id: room.id).each do |ap| %>
+          <div>
+          <strong>De:</strong> <%= ap.start_date.strftime("%d/%m/%y") %>
+          <strong>Até:</strong> <%= ap.end_date.strftime("%d/%m/%y") %>
+          <strong>Diária:</strong> R$<%= ap.price %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @rooms.empty? %>
+    <p>Não há quartos vagos</p>
+  <% end %>
 
 <div><%= link_to('Voltar', root_path) %></div>

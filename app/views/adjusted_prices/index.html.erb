@@ -1,0 +1,19 @@
+  <h2>Preços por período - <%=@room.name%> </h2>
+  
+  <div><%= link_to('Cadastrar preço por período', new_inn_room_adjusted_price_path(@inn.id, @room.id)) %></div> <br>
+  
+  <% @adjusted_prices.each do |adjusted_price| %>
+    <div>
+      <strong>De:</strong> <%= adjusted_price.start_date.strftime("%d/%m/%y") %>
+      <strong>Até:</strong> <%= adjusted_price.end_date.strftime("%d/%m/%y") %>
+      <strong>Diária:</strong> R$<%= adjusted_price.price %>
+      <%= link_to('Editar', edit_inn_room_adjusted_price_path(@inn.id, @room.id, adjusted_price.id)) %>
+      <%= button_to('Remover', inn_room_adjusted_price_path(@inn.id, @room.id, adjusted_price.id), method: :delete) %>
+    </div>
+  <% end %>
+  
+  <% if @adjusted_prices.empty? %>
+    <p>Nenhum periodo cadastrado</p>
+  <% end %>
+
+  <div><%= link_to('Voltar', inn_room_path(@inn.id, @room.id)) %></div>

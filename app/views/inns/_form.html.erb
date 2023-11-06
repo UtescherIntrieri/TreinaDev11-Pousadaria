@@ -1,7 +1,7 @@
 <%= form_with(model: @inn) do |f| %>
   <div>
-    <%= f.label :corporate_names%>
-    <%= f.text_field :corporate_names %>
+    <%= f.label :corporate_name%>
+    <%= f.text_field :corporate_name %>
   </div>
   <div>
     <%= f.label :brand_name%>
@@ -64,6 +64,7 @@
     <%= f.label :check_out%>
     <%= f.time_field :check_out %>
   </div>
+  <%= f.hidden_field :host_id, :value => current_host.id %>
   <div>
     <%= f.submit 'Enviar' %>
   </div>

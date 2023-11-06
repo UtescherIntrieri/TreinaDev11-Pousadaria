@@ -1,0 +1,53 @@
+<%= form_with(model: [@inn, @room]) do |f| %>
+  <div>
+    <%= f.label :name%>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+  <div>
+    <%= f.label :dimension %>
+    <%= f.number_field :dimension %>
+  </div>
+  <div>
+    <%= f.label :capacity %>
+    <%= f.number_field :capacity %>
+  </div>
+  <div>
+    <%= f.label :price %>
+    <%= f.number_field :price %>
+  </div>
+  <div>
+    <%= f.label :bathroom%>
+    <%= f.check_box :bathroom, {}, "true", "false" %>
+  </div>
+  <div>
+    <%= f.label :balcony %>
+    <%= f.check_box :balcony, {}, "true", "false" %>
+  </div>
+  <div>
+    <%= f.label :ac %>
+    <%= f.check_box :ac, {}, "true", "false" %>
+  </div>
+  <div>
+    <%= f.label :tv %>
+    <%= f.check_box :tv, {}, "true", "false" %>
+  </div>
+  <div>
+    <%= f.label :wardrobre %>
+    <%= f.check_box :wardrobre, {}, "true", "false" %>
+  </div>
+  <div>
+    <%= f.label :safe_box %>
+    <%= f.check_box :safe_box, {}, "true", "false" %>
+  </div>
+  <div>
+    <%= f.label :accessible %>
+    <%= f.check_box :accessible, {}, "true", "false" %>
+  </div>
+  <div>
+    <%= f.submit 'Enviar' %>
+  </div>
+<% end %>

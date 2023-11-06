@@ -1,0 +1,12 @@
+<h1>Cadastrar Preço por período</h1>
+
+<% if(@adjusted_price.errors.any?) %>
+  <p>Verifique os erros abaixo:</p>
+  <ul>
+    <% @adjusted_price.errors.full_messages.each do |msg|%>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= render 'form'%>

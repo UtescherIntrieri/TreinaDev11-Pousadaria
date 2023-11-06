@@ -1,12 +1,18 @@
 <h1>Cadastrar Pousada</h1>
 
-<% if(@inn.errors.any?) %>
-  <p>Verifique os erros abaixo:</p>
-  <ul>
-    <% @inn.errors.full_messages.each do |msg|%>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
+  <% if(@inn.errors.any?) %>
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+      <% @inn.errors.full_messages.each do |msg|%>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
 
-<%= render 'form'%>
+<% if host_signed_in? && Inn.all.where(host_id: current_host.id).any?%>
+  <% controller.redirect_to(root_path) %>
+<% elsif host_signed_in? %>
+  <%= render 'form'%>
+<% else %>
+  <% controller.redirect_to(root_path) %>
+<% end %>

@@ -1,0 +1,39 @@
+pt-BR:
+  activerecord:
+    models:
+      inn: 'Pousada'
+      room: 'Quarto'
+      host: 'Anfitrião'
+    attributes:
+      inn:
+        corporate_name: "Empresa"
+        brand_name: "Nome"
+        registration_number: "CNPJ"
+        phone_number: "Telefone"
+        email: "E-mail"
+        address: "Endereço"
+        neighborhood: "Bairro"
+        city: "Cidade"
+        state: "Estado"
+        postal_code: "CEP"
+        description: "Descrição"
+        payment_methods: "Métodos de pagamento"
+        pet_friendly: "Aceita Pets"
+        usage_policy: "Políticas de uso"
+        check_in: "Check-in"
+        check_out: "Check-out"
+      room:
+        name: "Nome"
+        description: "Descrição"
+        dimension: "Tamanho"
+        capacity: "Capacidade Máxima"
+        price: "Preço"
+        bathroom: "Banheiro Privativo"
+        balcony: "Sacada"
+        ac: "Ar-Condicionado"
+        tv: "TV"
+        wardrobre: "Guarda-Roupas"
+        safe_box: "Cofre"
+        accessible: "Acessível"
+      host:
+        name: 'Nome'

@@ -10,6 +10,15 @@
   </head>
 
   <body>
+    <h1><%= link_to 'Pousadaria', root_path %></h1>
+    <nav>
+        <% if host_signed_in? %>
+          <%= link_to current_host.name, host_path(current_host.id) %>
+          <%= button_to 'Sair', destroy_host_session_path, method: :delete %>
+        <% else %>
+          <%= link_to 'Entrar', new_host_session_path %>
+        <% end %>
+      </nav>
     <div>
       <%= alert %>
       <%= notice %>

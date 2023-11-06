@@ -1,0 +1,12 @@
+<h1>Cadastrar Quarto</h1>
+
+<% if(@room.errors.any?) %>
+  <p>Verifique os erros abaixo:</p>
+  <ul>
+    <% @room.errors.full_messages.each do |msg|%>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= render 'form'%>

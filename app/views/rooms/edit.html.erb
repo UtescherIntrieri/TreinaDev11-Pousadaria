@@ -1,0 +1,14 @@
+<h1>Editar Quarto</h1>
+
+<div><%= link_to('Gerenciar Preços por período', inn_room_adjusted_prices_path(@inn.id, @room.id)) %></div>
+
+<% if(@room.errors.any?) %>
+  <p>Verifique os erros abaixo:</p>
+  <ul>
+    <% @room.errors.full_messages.each do |msg|%>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= render 'form' %>

@@ -1,0 +1,37 @@
+<h1><%= @host.name %></h1>
+
+<% if @inn.blank? %>
+  <div><%= link_to("Cadastrar Pousada", new_inn_path)%></div>
+<% else %>
+    <div>
+      <h3><%= link_to(@inn.brand_name, @inn) %></h3>
+      <h4><%= @inn.description %></h4>
+      <dl>
+      <dt>Endereço:</dt>
+      <dd><%= @inn.address %> - <%= @inn.neighborhood %>. <%= @inn.city %> - <%= @inn.state %></dd>
+      <dt>Telefone:</dt>
+      <dd><%= @inn.phone_number %></dd>
+      </dl>
+    </div>
+
+    <% if @rooms.empty? %>
+      <p>Não há quartos vagos</p>
+    <% else %>
+    <h3>Quartos Cadastrados</h3>
+    <% @rooms.each do |room| %>
+      <div>
+        <h3><%= link_to(room.name, inn_room_path(@inn.id, room.id)) %></h3>
+        <h4><%= room.description %></h4>
+        <dl>
+        <dt>Capacidade:</dt>
+        <dd><%= room.capacity %> pessoas</dd>
+        <dt>Diária:</dt>
+        <dd><%= room.price %></dd>
+        <dt>Status:</dt>
+        <dd><%= room.status %></dd>
+        </dl>
+      </div>
+    <% end %>
+
+  <% end %>
+<% end %>

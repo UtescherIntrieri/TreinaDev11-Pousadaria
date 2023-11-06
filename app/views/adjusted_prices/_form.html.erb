@@ -1,0 +1,19 @@
+<%= form_with(model: [@inn, @room, @adjusted_price]) do |f| %>
+  <div>
+    <%= f.label :price%>
+    <%= f.number_field :price %>
+  </div>
+  <div>
+    <%= f.label :start_date%>
+    <%= f.date_field :start_date, min: Date.today %>
+  </div>
+  <div>
+    <%= f.label :end_date%>
+    <%= f.date_field :end_date, min: 1.day.from_now(Date.today) %>
+  </div>
+    <%= f.hidden_field :inn_id, :value => @room.inn_id %>
+
+  <div>
+    <%= f.submit 'Enviar' %>
+  </div>
+<% end %>
