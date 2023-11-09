@@ -3,16 +3,11 @@ require 'rails_helper'
 describe 'Host acessa /inns/new' do
   it 'e cria uma pousada com sucesso' do
     # Arrange
-    Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
+    host = Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
 
     # Act
+    login_as(host)
     visit root_path
-    click_on 'Entrar'
-    fill_in 'E-mail', with: 'joao@gmail.com' 
-    fill_in 'Senha', with: '123456' 
-    within 'form' do
-      click_on 'Entrar'
-    end
     fill_in 'Empresa', with: 'Pousadas Guaraú'
     fill_in 'Nome', with: 'Pousada na floresta'
     fill_in 'CNPJ', with: '88.297.902/0001-82'
@@ -43,16 +38,11 @@ describe 'Host acessa /inns/new' do
   
   it 'e falha ao criar uma pousada por não preencher os campos obrigatórios' do
     # Arrange
-    Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
+    host = Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
     
     # Act
+    login_as(host)
     visit root_path
-    click_on 'Entrar'
-    fill_in 'E-mail', with: 'joao@gmail.com' 
-    fill_in 'Senha', with: '123456' 
-    within 'form' do
-      click_on 'Entrar'
-    end
     fill_in 'Empresa', with: ''
     fill_in 'Nome', with: ''
     fill_in 'CNPJ', with: ''

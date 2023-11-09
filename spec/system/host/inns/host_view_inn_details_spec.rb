@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Host vê página de detalhes de uma pousada' do
   it 'que é a sua e vê os controles de host' do
     # Arrange
-    Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
+    host = Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
     Inn.create!(corporate_name: 'Pousadas Guaraú', brand_name: 'Pousada na floresta',
                 registration_number: '88.297.902/0001-82', phone_number: '(13)99754-7634',
                 email: 'dafloresta@gmail.com', address: 'Rua dos pássaros, 20', neighborhood: 'Guaraú',
@@ -13,13 +13,8 @@ describe 'Host vê página de detalhes de uma pousada' do
                 check_in: '13:00:00', check_out: '14:00:00', host_id: 1)
 
     # Act
+    login_as(host)
     visit(root_path)
-    click_on 'Entrar'
-    fill_in 'E-mail', with: 'joao@gmail.com' 
-    fill_in 'Senha', with: '123456' 
-    within 'form' do
-      click_on 'Entrar'
-    end
     click_on('Pousada na floresta')
 
     # Assert
@@ -45,7 +40,7 @@ describe 'Host vê página de detalhes de uma pousada' do
 
   it 'que não é a sua e não encontra os controles de host (Editar, Alterar Status, Cadastrar Quarto)' do
     # Arrange
-    Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
+    host = Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
     Inn.create!(corporate_name: 'Pousadas Guaraú', brand_name: 'Pousada na floresta',
                 registration_number: '88.297.902/0001-82', phone_number: '(13)99754-7634',
                 email: 'dafloresta@gmail.com', address: 'Rua dos pássaros, 20', neighborhood: 'Guaraú',
@@ -63,13 +58,8 @@ describe 'Host vê página de detalhes de uma pousada' do
                 check_in: '15:00:00', check_out: '16:00:00', host_id: 2)
     
     # Act
+    login_as(host)
     visit(root_path)
-    click_on 'Entrar'
-    fill_in 'E-mail', with: 'joao@gmail.com' 
-    fill_in 'Senha', with: '123456' 
-    within 'form' do
-      click_on 'Entrar'
-    end
     click_on('Pousadinha')
     
     # Assert
@@ -95,7 +85,7 @@ describe 'Host vê página de detalhes de uma pousada' do
 
   it 'que é a sua e altera seu Status com sucesso' do
     # Arrange
-    Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
+    host = Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
     Inn.create!(corporate_name: 'Pousadas Guaraú', brand_name: 'Pousada na floresta',
                 registration_number: '88.297.902/0001-82', phone_number: '(13)99754-7634',
                 email: 'dafloresta@gmail.com', address: 'Rua dos pássaros, 20', neighborhood: 'Guaraú',
@@ -105,13 +95,8 @@ describe 'Host vê página de detalhes de uma pousada' do
                 check_in: '13:00:00', check_out: '14:00:00', host_id: 1)
     
     # Act
+    login_as(host)
     visit(root_path)
-    click_on 'Entrar'
-    fill_in 'E-mail', with: 'joao@gmail.com' 
-    fill_in 'Senha', with: '123456' 
-    within 'form' do
-      click_on 'Entrar'
-    end
     click_on('Pousada na floresta')
     click_on 'Alterar Status'
     

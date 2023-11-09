@@ -1,0 +1,42 @@
+{
+    "contexts": {
+        "Inns": [
+            "app/views/inns/_form.html.erb",
+            "app/views/inns/new.html.erb",
+            "app/views/inns/edit.html.erb",
+            "app/views/inns/show.html.erb",
+            "app/controllers/inns_controller.rb",
+            "app/models/inn.rb"
+        ],
+        "Hosts": [
+            "app/views/hosts/show.html.erb",
+            "app/controllers/hosts_controller.rb",
+            "app/models/host.rb"
+        ],
+        "Rooms": [
+            "app/views/rooms/_form.html.erb",
+            "app/views/rooms/new.html.erb",
+            "app/views/rooms/edit.html.erb",
+            "app/views/rooms/show.html.erb",
+            "app/controllers/rooms_controller.rb",
+            "app/models/room.rb"
+        ],
+        "Home": [
+            "app/views/home/index.html.erb",
+            "app/views/layouts/application.html.erb",
+            "app/controllers/home_controller.rb",
+            "app/controllers/application_controller.rb"
+        ],
+        "Adjusted_prices": [
+            "app/views/adjusted_prices/_form.html.erb",
+            "app/views/adjusted_prices/new.html.erb",
+            "app/views/adjusted_prices/edit.html.erb",
+            "app/views/adjusted_prices/index.html.erb",
+            "app/models/adjusted_price.rb",
+            "app/controllers/adjusted_prices_controller.rb"
+        ]
+    },
+    "configs": {
+        "showFolders": false
+    }
+}

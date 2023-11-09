@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Host visita tela inicial' do
   it 'com sucesso' do
     # Arrange
-    Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
+    host = Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
     Inn.create!(corporate_name: 'Pousadas Guaraú', brand_name: 'Pousada na floresta',
                 registration_number: '88.297.902/0001-82', phone_number: '(13)99754-7634',
                 email: 'dafloresta@gmail.com', address: 'Rua dos pássaros, 20', neighborhood: 'Guaraú',
@@ -14,12 +14,7 @@ describe 'Host visita tela inicial' do
 
     # Act
     visit root_path
-    click_on 'Entrar'
-    fill_in 'E-mail', with: 'joao@gmail.com' 
-    fill_in 'Senha', with: '123456' 
-    within 'form' do
-      click_on 'Entrar'
-    end
+    login_as(host)
     visit root_path
 
     # Assert
@@ -36,7 +31,7 @@ describe 'Host visita tela inicial' do
 
   it 'e não existem pousadas ativas' do
     # Arrange
-    Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
+    host = Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
     inn = Inn.create!(corporate_name: 'Pousadas Guaraú', brand_name: 'Pousada na floresta',
                 registration_number: '88.297.902/0001-82', phone_number: '(13)99754-7634',
                 email: 'dafloresta@gmail.com', address: 'Rua dos pássaros, 20', neighborhood: 'Guaraú',
@@ -48,12 +43,7 @@ describe 'Host visita tela inicial' do
 
     # Act
     visit(root_path)
-    click_on 'Entrar'
-    fill_in 'E-mail', with: 'joao@gmail.com' 
-    fill_in 'Senha', with: '123456' 
-    within 'form' do
-      click_on 'Entrar'
-    end
+    login_as(host)
     visit root_path
 
     # Assert

@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Host acessa página de Editar da sua pousada' do
   it 'a partir da página de detalhes' do
     # Arrange
-    Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
+    host = Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
     Inn.create!(corporate_name: 'Pousadas Guaraú', brand_name: 'Pousada na floresta',
                 registration_number: '88.297.902/0001-82', phone_number: '(13)99754-7634',
                 email: 'dafloresta@gmail.com', address: 'Rua dos pássaros, 20', neighborhood: 'Guaraú',
@@ -14,12 +14,7 @@ describe 'Host acessa página de Editar da sua pousada' do
      
     # Act
     visit(root_path)
-    click_on 'Entrar'
-    fill_in 'E-mail', with: 'joao@gmail.com' 
-    fill_in 'Senha', with: '123456' 
-    within 'form' do
-      click_on 'Entrar'
-    end
+    login_as(host)
     click_on('Pousada na floresta')
     click_on('Editar')
     
@@ -45,7 +40,7 @@ describe 'Host acessa página de Editar da sua pousada' do
 
   it 'e edita informações com sucesso' do
     # Arrange
-    Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
+    host = Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
     Inn.create!(corporate_name: 'Pousadas Guaraú', brand_name: 'Pousada na floresta',
                 registration_number: '88.297.902/0001-82', phone_number: '(13)99754-7634',
                 email: 'dafloresta@gmail.com', address: 'Rua dos pássaros, 20', neighborhood: 'Guaraú',
@@ -56,12 +51,7 @@ describe 'Host acessa página de Editar da sua pousada' do
     
     # Act
     visit(root_path)
-    click_on 'Entrar'
-    fill_in 'E-mail', with: 'joao@gmail.com' 
-    fill_in 'Senha', with: '123456' 
-    within 'form' do
-      click_on 'Entrar'
-    end
+    login_as(host)
     click_on('Pousada na floresta')
     click_on('Editar')
 
@@ -75,7 +65,7 @@ describe 'Host acessa página de Editar da sua pousada' do
 
   it 'e falha ao editar uma pousada por não preencher os campos obrigatórios' do
     # Arrange
-    Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
+    host = Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
     Inn.create!(corporate_name: 'Pousadas Guaraú', brand_name: 'Pousada na floresta',
                 registration_number: '88.297.902/0001-82', phone_number: '(13)99754-7634',
                 email: 'dafloresta@gmail.com', address: 'Rua dos pássaros, 20', neighborhood: 'Guaraú',
@@ -85,12 +75,7 @@ describe 'Host acessa página de Editar da sua pousada' do
                 check_in: '13:00:00', check_out: '14:00:00', host_id: 1)    
     # Act
     visit(root_path)
-    click_on 'Entrar'
-    fill_in 'E-mail', with: 'joao@gmail.com' 
-    fill_in 'Senha', with: '123456' 
-    within 'form' do
-      click_on 'Entrar'
-    end
+    login_as(host)
     click_on('Pousada na floresta')
     click_on('Editar')
     fill_in 'Empresa', with: ''

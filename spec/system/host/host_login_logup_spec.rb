@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Usuário faz login' do
-  it 'sem se cadastrar/com dados incorretos' do
+  it 'sem se cadastrar/com dados incorretos e falha' do
     # Arrange
     
     # Act
@@ -17,7 +17,7 @@ describe 'Usuário faz login' do
     expect(page).to have_content('E-mail ou senha inválidos') 
   end
 
-  it 'pela tela de cadastro e esquece de confirmar a senha' do
+  it 'pela tela de cadastro, esquece de confirmar a senha e falha' do
     # Arrange
     
     # Act
@@ -37,7 +37,7 @@ describe 'Usuário faz login' do
     expect(page).to have_content('Criar conta')
   end
 
-  it 'pela tela de cadastro' do
+  it 'pela tela de cadastro com sucesso' do
     # Arrange
     
     # Act
@@ -100,18 +100,13 @@ describe 'Usuário faz login' do
     expect(page).to have_current_path('/inns/new') 
   end
 
-  it 'pela tela de login e faz logout' do
+  it 'e faz logout' do
     # Arrange
-    Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
+    host = Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
     
     # Act
+    login_as(host)
     visit root_path
-    click_on 'Entrar'
-    fill_in 'E-mail', with: 'joao@gmail.com' 
-    fill_in 'Senha', with: '123456' 
-    within 'form' do
-      click_on 'Entrar'
-    end
     click_on 'Sair'
     
     # Assert
