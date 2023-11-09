@@ -4,7 +4,6 @@ class InnsController < ApplicationController
 
   def show
     @rooms = Room.vacant.where(inn_id: @inn.id)
-    @adjusted_prices = AdjustedPrice.all.where(inn_id: @inn.id)
   end
 
   def new

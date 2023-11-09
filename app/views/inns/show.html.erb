@@ -28,29 +28,21 @@
 <% end %>
 
 <% @rooms.each do |room| %>
-    <div>
-      <h3><%= link_to(room.name, inn_room_path(@inn.id, room.id)) %></h3>
-      <h4><%= room.description %></h4>
-      <dl>
-      <dt>Capacidade:</dt>
-      <dd><%= room.capacity %> pessoas</dd>
-      <dt>Diária:</dt>
-      <dd>R$<%= room.price %></dd>
-      </dl>
-
-      <% if @adjusted_prices.where(room_id: room.id).any? %>
-        <h3>Preços especiais</h3>
-
-        <% @adjusted_prices.where(room_id: room.id).each do |ap| %>
-          <div>
-          <strong>De:</strong> <%= ap.start_date.strftime("%d/%m/%y") %>
-          <strong>Até:</strong> <%= ap.end_date.strftime("%d/%m/%y") %>
-          <strong>Diária:</strong> R$<%= ap.price %>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
-  <% end %>
+  <div>
+    <h3><%= link_to(room.name, inn_room_path(@inn.id, room.id)) %></h3>
+    <strong>Tamanho:</strong> <%= room.dimension %>m² <br>
+    <strong>Capacidade:</strong> <%= room.capacity %> pessoas <br>
+    <strong>Banheiro Privativo:</strong> <%= room.bathroom %> <br>
+    <strong>Sacada:</strong> <%= room.balcony %> <br>
+    <strong>Ar-Condicionado:</strong> <%= room.ac %> <br>
+    <strong>TV:</strong> <%= room.tv %> <br>
+    <strong>Guarda-Roupa:</strong> <%= room.wardrobre %> <br>
+    <strong>Cofre:</strong> <%= room.safe_box %> <br>
+    <strong>Acessível:</strong> <%= room.accessible %> <br>
+    <strong>Diária:</strong> R$<%= room.price %> <br>
+    <strong>Inn:</strong> <%= room.inn_id %> <br>
+  </div>
+<% end %>
 
   <% if @rooms.empty? %>
     <p>Não há quartos vagos</p>

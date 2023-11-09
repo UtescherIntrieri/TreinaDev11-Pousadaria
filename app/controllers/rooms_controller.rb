@@ -5,7 +5,6 @@ class RoomsController < ApplicationController
   
   def show
     @room = Room.all.where(inn_id: @inn.id).find(params[:id])
-    @adjusted_prices = AdjustedPrice.all.where(inn_id: @inn.id).where(room_id: @room.id)
   end
   
   def new

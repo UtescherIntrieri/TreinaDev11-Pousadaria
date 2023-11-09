@@ -21,16 +21,6 @@
   <strong>Status:</strong> <%= @room.status %> <br>
   <strong>Diária:</strong> R$<%= @room.price %> <br>
   <strong>Inn:</strong> <%= @room.inn_id %> <br>
-  <% if @adjusted_prices.any? %>
-    <h3>Preços especiais</h3>
-    <% @adjusted_prices.each do |adjusted_price| %>
-      <div>
-        <strong>De:</strong> <%= adjusted_price.start_date.strftime("%d/%m/%y") %>
-        <strong>Até:</strong> <%= adjusted_price.end_date.strftime("%d/%m/%y") %>
-        <strong>Diária:</strong> R$<%= adjusted_price.price %>
-      </div>
-    <% end %>
-  <% end %>
 </div>
 
 <div><%= link_to('Voltar', inn_path(@inn.id)) %></div>
