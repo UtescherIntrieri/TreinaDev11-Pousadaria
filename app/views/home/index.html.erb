@@ -1,8 +1,10 @@
 <h2 id='space-around'>Cidades</h2>
 <div id='space-around'>
-  <% Inn.order('city').distinct.pluck(:city).each do |city| %>  
-    <h3><%= link_to(city, city_search_inns_path(query: city)) %></h3>
-  <% end %>
+    <% if @all_inns.any? %>
+      <% @all_inns.order('city').distinct.pluck(:city).each do |city| %>  
+        <h3><%= link_to(city, city_search_inns_path(query: city)) %></h3>
+      <% end %>
+    <% end %>
 </div>
 
 <section id="inns">

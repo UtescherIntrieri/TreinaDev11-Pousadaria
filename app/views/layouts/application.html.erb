@@ -15,8 +15,21 @@
         <% if host_signed_in? %>
           <%= link_to current_host.name, host_path(current_host.id) %>
           <%= button_to 'Sair', destroy_host_session_path, method: :delete %>
+          <div>
         <% else %>
           <%= link_to 'Entrar', new_host_session_path %>
+          <h2>Buscar Pousadas</h2>
+            <%= form_with(url: search_inns_path, method: :get) do |f| %>
+              <%= f.label :brand_name, 'Nome' %>
+              <%= f.text_field :brand_name %>
+              <%= f.label :neighborhood, 'Bairro' %>
+              <%= f.text_field :neighborhood %>
+              <%= f.label :city, 'Cidade' %>
+              <%= f.text_field :city %>
+              <%= f.submit 'Buscar' %>
+            <% end %>
+          <%= link_to 'Busca avançada', adv_search_inns_path %>
+          </div>
         <% end %>
       </nav>
     <div>

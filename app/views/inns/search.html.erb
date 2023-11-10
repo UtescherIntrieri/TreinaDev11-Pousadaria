@@ -1,0 +1,11 @@
+<h1><%= @inns.count %> <%= @inns.model_name.human(count: @inns.count) %> <%= t(:found, count: @inns.count) %>: </h1>
+
+<div id='space-around'>
+  <% @inns.each do |inn| %>
+    <div>
+      <h3><%= link_to(inn.brand_name, inn) %></h3>
+      <h4><%= inn.city %> - <%= inn.state %></h4>
+      <h4>Quartos Disponíveis: <%= @rooms.where(inn_id: inn.id).length %></h4>
+    </div>
+  <% end %>
+</div>

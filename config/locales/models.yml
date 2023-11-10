@@ -1,4 +1,7 @@
 pt-BR:
+  found:
+    one: 'encontrada'
+    other: 'encontradas'
   activerecord:
     models:
       inn:

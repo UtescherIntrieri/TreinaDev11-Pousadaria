@@ -16,7 +16,7 @@
 </div>
 
 <% if host_signed_in? && current_host.id == @inn.host_id %>
-  <%= button_to 'Alterar Status', activate_inn_path, { method: 'patch' } %>
+  <%= button_to "Alterar Status: #{@inn.status}", activate_inn_path, { method: 'patch' } %>
 <% end %>
 
 <% if host_signed_in? && current_host.id == @inn.host_id %>

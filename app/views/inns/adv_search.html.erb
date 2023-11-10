@@ -1,0 +1,29 @@
+<h1>Busca Avançada</h1>
+
+ <%= form_with(url: search_inns_path, method: :get) do |f| %>
+    <%= f.label :brand_name, 'Nome' %>
+    <%= f.text_field :brand_name %> <br>
+    <%= f.label :neighborhood, 'Bairro' %>
+    <%= f.text_field :neighborhood %> <br>
+    <%= f.label :city, 'Cidade' %>
+    <%= f.text_field :city %> <br>
+    <%= f.label :capacity, 'Capacidade' %>
+    <%= select_tag(:pet_friendly, options_for_select(([['', ''],['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]))) %> Pessoas <br>
+    <%= f.label :pet_friendly, 'Aceita Pets' %>
+    <%= select_tag(:pet_friendly, options_for_select(([['', ''],['Sim', 1], ['Não', 0]]))) %> <br>
+    <%= f.label :bathroom, 'Banheiro Privativo' %>
+    <%= select_tag(:bathroom, options_for_select(([['', ''],['Sim', 1], ['Não', 0]]))) %> <br>
+    <%= f.label :balcony, 'Sacada' %>
+    <%= select_tag(:balcony, options_for_select(([['', ''],['Sim', 1], ['Não', 0]]))) %> <br>
+    <%= f.label :ac, 'Ar-Condicionado' %>
+    <%= select_tag(:ac, options_for_select(([['', ''],['Sim', 1], ['Não', 0]]))) %> <br>
+    <%= f.label :tv, 'TV' %>
+    <%= select_tag(:tv, options_for_select(([['', ''],['Sim', 1], ['Não', 0]]))) %> <br>
+    <%= f.label :wardrobre, 'Guarda-Roupas' %>
+    <%= select_tag(:wardrobre, options_for_select(([['', ''],['Sim', 1], ['Não', 0]]))) %> <br>
+    <%= f.label :safe_box, 'Cofre' %>
+    <%= select_tag(:safe_box, options_for_select(([['', ''],['Sim', 1], ['Não', 0]]))) %> <br>
+    <%= f.label :accessible, 'Acessível' %>
+    <%= select_tag(:accessible, options_for_select(([['', ''],['Sim', 1], ['Não', 0]]))) %> <br>
+    <%= f.submit 'Buscar' %>
+  <% end %>

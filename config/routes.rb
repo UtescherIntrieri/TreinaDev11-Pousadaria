@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   resources :inns, only: [:show, :new, :create, :edit, :update] do
     patch :activate, on: :member
     get 'city_search', on: :collection
+    get 'search', on: :collection
+    get 'adv_search', on: :collection
+    
     
     resources :rooms, only: [:show, :new, :create, :edit, :update, :destroy] do
       patch :vacancy, on: :member
