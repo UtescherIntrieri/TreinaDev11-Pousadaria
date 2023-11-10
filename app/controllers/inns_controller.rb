@@ -46,7 +46,7 @@ class InnsController < ApplicationController
   def city_search
     @rooms = Room.vacant
     @city = params["query"]
-    @inns = Inn.where("city LIKE ?", "%#{@city}%")
+    @inns = Inn.order('brand_name').where("city LIKE ?", "%#{@city}%")
   end
 
   private
