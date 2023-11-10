@@ -7,7 +7,6 @@
   <div><%= button_to 'Alterar Status', vacancy_inn_room_path, { method: 'patch' } %></div>
 <% end %>
 
-
 <div>
   <strong>Tamanho:</strong> <%= @room.dimension %>m² <br>
   <strong>Capacidade:</strong> <%= @room.capacity %> pessoas <br>
@@ -20,7 +19,6 @@
   <strong>Acessível:</strong> <%= @room.accessible %> <br>
   <strong>Status:</strong> <%= @room.status %> <br>
   <strong>Diária:</strong> R$<%= @room.price %> <br>
-  <strong>Inn:</strong> <%= @room.inn_id %> <br>
 </div>
 
 <div><%= link_to('Voltar', inn_path(@inn.id)) %></div>

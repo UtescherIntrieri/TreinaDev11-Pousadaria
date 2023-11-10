@@ -13,39 +13,38 @@
   <strong>Aceita pet:</strong> <%= @inn.pet_friendly %> <br>
   <strong>Politicas de Uso:</strong> <%= @inn.usage_policy %> <br>
   <strong>Métodos de pagamento:</strong> <%= @inn.payment_methods %> <br>
-  <strong>Empresa:</strong> <%= @inn.corporate_name %> - <strong>CNPJ:</strong> <%= @inn.registration_number %> <br>
-  <strong>Status:</strong> <%= @inn.status %> <br>
 </div>
 
 <% if host_signed_in? && current_host.id == @inn.host_id %>
   <%= button_to 'Alterar Status', activate_inn_path, { method: 'patch' } %>
 <% end %>
 
-<h3>Quartos Disponíveis</h3>
-
 <% if host_signed_in? && current_host.id == @inn.host_id %>
   <%= link_to("Cadastrar Quarto", new_inn_room_path(@inn.id))%>
 <% end %>
 
-<% @rooms.each do |room| %>
-  <div>
-    <h3><%= link_to(room.name, inn_room_path(@inn.id, room.id)) %></h3>
-    <strong>Tamanho:</strong> <%= room.dimension %>m² <br>
-    <strong>Capacidade:</strong> <%= room.capacity %> pessoas <br>
-    <strong>Banheiro Privativo:</strong> <%= room.bathroom %> <br>
-    <strong>Sacada:</strong> <%= room.balcony %> <br>
-    <strong>Ar-Condicionado:</strong> <%= room.ac %> <br>
-    <strong>TV:</strong> <%= room.tv %> <br>
-    <strong>Guarda-Roupa:</strong> <%= room.wardrobre %> <br>
-    <strong>Cofre:</strong> <%= room.safe_box %> <br>
-    <strong>Acessível:</strong> <%= room.accessible %> <br>
-    <strong>Diária:</strong> R$<%= room.price %> <br>
-    <strong>Inn:</strong> <%= room.inn_id %> <br>
+<% if @rooms.empty? %>
+  <h3>Não há quartos vagos</h3>
+<% else %>
+  <h3 id='space-around'>Quartos Disponíveis</h3>
+  <div id='space-around'>
+    <% @rooms.each do |room| %>
+      <div>
+        <h3><%= link_to(room.name, inn_room_path(@inn.id, room.id)) %></h3>
+        <h3><%= room.description %> </h3>
+        <strong>Tamanho:</strong> <%= room.dimension %>m² <br>
+        <strong>Capacidade:</strong> <%= room.capacity %> pessoas <br>
+        <strong>Banheiro Privativo:</strong> <%= room.bathroom %> <br>
+        <strong>Sacada:</strong> <%= room.balcony %> <br>
+        <strong>Ar-Condicionado:</strong> <%= room.ac %> <br>
+        <strong>TV:</strong> <%= room.tv %> <br>
+        <strong>Guarda-Roupa:</strong> <%= room.wardrobre %> <br>
+        <strong>Cofre:</strong> <%= room.safe_box %> <br>
+        <strong>Acessível:</strong> <%= room.accessible %> <br>
+        <strong>Diária:</strong> R$<%= room.price %> <br>
+      </div>
+    <% end %>
   </div>
 <% end %>
-
-  <% if @rooms.empty? %>
-    <p>Não há quartos vagos</p>
-  <% end %>
 
 <div><%= link_to('Voltar', root_path) %></div>

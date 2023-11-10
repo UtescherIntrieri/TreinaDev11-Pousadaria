@@ -2,22 +2,28 @@
   <% if host_signed_in? && Inn.all.where(host_id: current_host.id).empty?%>
     <% controller.redirect_to(new_inn_path) %>
   <% else %>
-    <h2>Pousadas</h2>
-    <% @inns.each do |inn| %>
-      <div>
-        <h3><%= link_to(inn.brand_name, inn) %></h3>
-        <h4><%= inn.description %></h4>
-        <dl>
-        <dt>Endereço:</dt>
-        <dd><%= inn.address %> - <%= inn.neighborhood %>. <%= inn.city %> - <%= inn.state %></dd>
-        <dt>Telefone:</dt>
-        <dd><%= inn.phone_number %></dd>
-        <dt>Quartos Disponíveis:</dt>
-        <dd><%= @rooms.where(inn_id: inn.id).length %></dd>
-        </dl>
-      </div>
-    <% end %>
-    
+    <h2 id='space-around'>Últimas Pousadas Cadastradas</h2>
+    <div id='space-around'>
+      <% @last_3_inns.each do |inn| %>
+        <div>
+          <h3><%= link_to(inn.brand_name, inn) %></h3>
+          <h4><%= inn.city %> - <%= inn.state %></h4>
+          <h4>Quartos Disponíveis: <%= @rooms.where(inn_id: inn.id).length %></h4>
+        </div>
+      <% end %>
+    </div>
+
+    <h2 id='space-around'>Todas Outras Pousadas</h2>
+    <div id='space-around'>
+      <% @inns.each do |inn| %>
+        <div>
+          <h3><%= link_to(inn.brand_name, inn) %></h3>
+          <h4><%= inn.city %> - <%= inn.state %></h4>
+          <h4>Quartos Disponíveis: <%= @rooms.where(inn_id: inn.id).length %></h4>
+        </div>
+      <% end %>
+      
+    </div>
     <% if @inns.empty? %>
       <p>Não existem pousadas cadastradas</p>
     <% end %>
