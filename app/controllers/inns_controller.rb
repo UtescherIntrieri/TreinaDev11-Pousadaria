@@ -43,6 +43,12 @@ class InnsController < ApplicationController
     redirect_to inn_path(@inn.id)
   end
 
+  def city_search
+    @rooms = Room.vacant
+    @city = params["query"]
+    @inns = Inn.where("city LIKE ?", "%#{@city}%")
+  end
+
   private
 
   def set_inn

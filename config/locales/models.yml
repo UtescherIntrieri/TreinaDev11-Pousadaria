@@ -1,7 +1,9 @@
 pt-BR:
   activerecord:
     models:
-      inn: 'Pousada'
+      inn:
+        one: 'Pousada'
+        other: 'Pousadas'
       room: 'Quarto'
       host: 'Anfitrião'
     attributes:
