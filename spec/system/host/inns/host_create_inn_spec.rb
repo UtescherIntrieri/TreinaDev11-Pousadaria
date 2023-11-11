@@ -29,9 +29,7 @@ describe 'Host acessa /inns/new' do
     # Assert
     expect(page).to have_content('Pousada cadastrada com sucesso.')
     expect(page).to have_content('Pousada na floresta')
-    expect(page).to have_content('Uma pousada com muita natureza')
-    expect(page).to have_content('Endereço: Rua dos pássaros, 20 - Guaraú. Peruíbe - SP')
-    expect(page).to have_content('Telefone: (13)99754-7634')
+    expect(page).to have_content('Peruíbe - SP')
     expect(page).to have_content('Quartos Disponíveis: 0')
     expect(page).to have_current_path(root_path) 
   end

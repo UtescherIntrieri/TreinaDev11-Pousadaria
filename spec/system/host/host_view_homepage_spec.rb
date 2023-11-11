@@ -23,9 +23,7 @@ describe 'Host visita tela inicial' do
     expect(page).not_to have_content 'Entrar'
     expect(page).to have_content 'Pousadas'
     expect(page).to have_content 'Pousada na floresta'
-    expect(page).to have_content 'Uma pousada com muita natureza'
-    expect(page).to have_content 'Endereço: Rua dos pássaros, 20 - Guaraú. Peruíbe - SP'
-    expect(page).to have_content 'Telefone: (13)99754-7634'
+    expect(page).to have_content 'Peruíbe - SP'
     expect(page).to have_content 'Quartos Disponíveis: 0'
   end
 

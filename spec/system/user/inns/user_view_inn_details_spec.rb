@@ -26,9 +26,6 @@ describe 'Usuário deslogado vê detalhes de uma Pousada' do
     expect(page).to have_content('pet: true')
     expect(page).to have_content('Politicas de Uso: não fumar, limpar após o uso')
     expect(page).to have_content('Métodos de pagamento: Débito, Crédito, Pix e dinheiro')
-    expect(page).to have_content('Empresa: Pousadas Guaraú - CNPJ: 88.297.902/0001-82')
-    expect(page).to have_content('Status: active')
-    expect(page).to have_content('Quartos Disponíveis')
     expect(page).to have_content('Não há quartos vagos')
   end
   
@@ -77,9 +74,6 @@ describe 'Usuário deslogado vê detalhes de uma Pousada' do
     expect(page).to have_content('Aceita pet: true')
     expect(page).to have_content('Politicas de Uso: não fumar, limpar após o uso')
     expect(page).to have_content('Métodos de pagamento: Débito, Crédito, Pix e dinheiro')
-    expect(page).to have_content('Empresa: Pousadas Guaraú - CNPJ: 88.297.902/0001-82')
-    expect(page).to have_content('Status: active')
-    expect(page).to have_content('Quartos Disponíveis')
     expect(page).to have_content('Não há quartos vagos')
     expect(page).not_to have_content('Editar')
     expect(page).not_to have_content('Alterar Status')

@@ -9,7 +9,7 @@ describe 'Usuário faz login' do
     click_on 'Entrar'
     fill_in 'E-mail', with: 'joao@gmail.com' 
     fill_in 'Senha', with: '123456' 
-    within 'form' do
+    within('form#new_host') do
       click_on 'Entrar'
     end
     
@@ -24,10 +24,10 @@ describe 'Usuário faz login' do
     visit root_path
     click_on 'Entrar'
     click_on 'Cadastrar'
-    fill_in 'Nome', with: 'João' 
-    fill_in 'E-mail', with: 'joao@gmail.com' 
-    fill_in 'Senha', with: '123456' 
-    within 'form' do
+    within ('form#new_host') do
+      fill_in 'Nome', with: 'João' 
+      fill_in 'E-mail', with: 'joao@gmail.com' 
+      fill_in 'Senha', with: '123456' 
       click_on 'Criar'
     end
     
@@ -44,12 +44,13 @@ describe 'Usuário faz login' do
     visit root_path
     click_on 'Entrar'
     click_on 'Cadastrar'
-    fill_in 'Nome', with: 'João' 
-    fill_in 'E-mail', with: 'joao@gmail.com' 
-    fill_in 'Senha', with: '123456' 
-    fill_in 'Confirme sua senha', with: '123456' 
-    click_on 'Criar'
-    
+    within ('form#new_host') do
+      fill_in 'Nome', with: 'João' 
+      fill_in 'E-mail', with: 'joao@gmail.com' 
+      fill_in 'Senha', with: '123456' 
+      fill_in 'Confirme sua senha', with: '123456' 
+      click_on 'Criar'
+    end
     # Assert
     expect(page).to have_content('João') 
     expect(page).to have_content('Sair') 
@@ -64,11 +65,13 @@ describe 'Usuário faz login' do
     visit root_path
     click_on 'Entrar'
     click_on 'Cadastrar'
-    fill_in 'Nome', with: 'João' 
-    fill_in 'E-mail', with: 'joao@gmail.com' 
-    fill_in 'Senha', with: '123456' 
-    fill_in 'Confirme sua senha', with: '123456' 
-    click_on 'Criar'
+    within ('form#new_host') do
+      fill_in 'Nome', with: 'João' 
+      fill_in 'E-mail', with: 'joao@gmail.com' 
+      fill_in 'Senha', with: '123456' 
+      fill_in 'Confirme sua senha', with: '123456' 
+      click_on 'Criar'
+    end
     visit root_path
     
     # Assert
@@ -86,9 +89,9 @@ describe 'Usuário faz login' do
     # Act
     visit root_path
     click_on 'Entrar'
-    fill_in 'E-mail', with: 'joao@gmail.com' 
-    fill_in 'Senha', with: '123456' 
-    within 'form' do
+    within ('form#new_host') do
+      fill_in 'E-mail', with: 'joao@gmail.com' 
+      fill_in 'Senha', with: '123456' 
       click_on 'Entrar'
     end
     

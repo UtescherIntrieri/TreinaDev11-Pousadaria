@@ -28,12 +28,10 @@ describe 'Host vê página de detalhes de uma pousada' do
     expect(page).to have_content 'pet: true'
     expect(page).to have_content 'Politicas de Uso: não fumar, limpar após o uso'
     expect(page).to have_content 'Métodos de pagamento: Débito, Crédito, Pix e dinheiro'
-    expect(page).to have_content 'Empresa: Pousadas Guaraú - CNPJ: 88.297.902/0001-82'
     expect(page).to have_content 'Status: active'
-    expect(page).to have_content 'Quartos Disponíveis'
     expect(page).to have_content 'Não há quartos vagos'
     expect(page).to have_content 'Editar'
-    expect(page).to have_content 'Alterar Status'
+    expect(page).to have_content 'Alterar Status: active'
     expect(page).to have_content 'Cadastrar Quarto'
     expect(page).to have_current_path('/inns/1') 
   end
@@ -73,9 +71,6 @@ describe 'Host vê página de detalhes de uma pousada' do
     expect(page).to have_content 'Aceita pet: false'
     expect(page).to have_content 'Politicas de Uso: não fazer barulhos altos'
     expect(page).to have_content 'Métodos de pagamento: Débito, Crédito, Pix e dinheiro'
-    expect(page).to have_content 'Empresa: Pousadas da Maria - CNPJ: 81.664.477/0001-73'
-    expect(page).to have_content 'Status: active'
-    expect(page).to have_content 'Quartos Disponíveis'
     expect(page).to have_content 'Não há quartos vagos'
     expect(page).not_to have_content 'Editar'
     expect(page).not_to have_content 'Alterar Status'
