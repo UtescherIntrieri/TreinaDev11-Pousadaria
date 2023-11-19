@@ -20,5 +20,7 @@
   <strong>Status:</strong> <%= @room.status %> <br>
   <strong>Diária:</strong> R$<%= @room.price %> <br>
 </div>
-
+<% unless host_signed_in? %>
+  <div><%= link_to('Fazer Reserva', new_inn_room_reservation_path(@inn.id, @room.id)) %></div>
+<% end %>
 <div><%= link_to('Voltar', inn_path(@inn.id)) %></div>

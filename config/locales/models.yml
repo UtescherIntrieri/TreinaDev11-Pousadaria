@@ -9,6 +9,7 @@ pt-BR:
         other: 'Pousadas'
       room: 'Quarto'
       host: 'Anfitrião'
+      guest: 'Hóspede'
     attributes:
       inn:
         corporate_name: "Empresa"
@@ -41,4 +42,6 @@ pt-BR:
         safe_box: "Cofre"
         accessible: "Acessível"
       host:
+        name: 'Nome'
+      guest:
         name: 'Nome'

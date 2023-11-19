@@ -14,7 +14,7 @@ describe 'Host acessa página de Editar da sua pousada' do
      
     # Act
     visit(root_path)
-    login_as(host)
+    login_as host, scope: :host
     click_on('Pousada na floresta')
     click_on('Editar')
     
@@ -51,7 +51,7 @@ describe 'Host acessa página de Editar da sua pousada' do
     
     # Act
     visit(root_path)
-    login_as(host)
+    login_as host, scope: :host
     click_on('Pousada na floresta')
     click_on('Editar')
 
@@ -75,7 +75,7 @@ describe 'Host acessa página de Editar da sua pousada' do
                 check_in: '13:00:00', check_out: '14:00:00', host_id: 1)    
     # Act
     visit(root_path)
-    login_as(host)
+    login_as host, scope: :host
     click_on('Pousada na floresta')
     click_on('Editar')
     fill_in 'Empresa', with: ''

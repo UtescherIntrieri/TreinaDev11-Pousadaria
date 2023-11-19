@@ -3,7 +3,7 @@
 <% if(@adjusted_price.errors.any?) %>
   <p>Verifique os erros abaixo:</p>
   <ul>
-    <% @adjusted_price.errors.full_messages.each do |msg|%>
+    <% @adjusted_price.errors.messages.values.flatten.each do |msg|%>
       <li><%= msg %></li>
     <% end %>
   </ul>

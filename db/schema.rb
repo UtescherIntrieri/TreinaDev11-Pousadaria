@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_06_003830) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_19_135209) do
   create_table "adjusted_prices", force: :cascade do |t|
     t.date "start_date"
     t.date "end_date"
@@ -21,6 +21,20 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_06_003830) do
     t.integer "inn_id", default: 0, null: false
     t.index ["inn_id"], name: "index_adjusted_prices_on_inn_id"
     t.index ["room_id"], name: "index_adjusted_prices_on_room_id"
+  end
+
+  create_table "guests", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "name"
+    t.string "cpf"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_guests_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_guests_on_reset_password_token", unique: true
   end
 
   create_table "hosts", force: :cascade do |t|
@@ -60,6 +74,20 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_06_003830) do
     t.index ["host_id"], name: "index_inns_on_host_id"
   end
 
+  create_table "reservations", force: :cascade do |t|
+    t.integer "room_id", null: false
+    t.integer "guest_id"
+    t.integer "group_size"
+    t.date "arrive_date"
+    t.date "leave_date"
+    t.integer "total_price"
+    t.integer "status", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "code"
+    t.index ["room_id"], name: "index_reservations_on_room_id"
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -83,5 +111,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_06_003830) do
   add_foreign_key "adjusted_prices", "inns"
   add_foreign_key "adjusted_prices", "rooms"
   add_foreign_key "inns", "hosts"
+  add_foreign_key "reservations", "guests"
+  add_foreign_key "reservations", "rooms"
   add_foreign_key "rooms", "inns"
 end

@@ -14,7 +14,7 @@ describe 'Host visita tela inicial' do
 
     # Act
     visit root_path
-    login_as(host)
+    login_as host, scope: :host
     visit root_path
 
     # Assert
@@ -41,7 +41,7 @@ describe 'Host visita tela inicial' do
 
     # Act
     visit(root_path)
-    login_as(host)
+    login_as host, scope: :host
     visit root_path
 
     # Assert

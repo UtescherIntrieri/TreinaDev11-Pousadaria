@@ -1,0 +1,19 @@
+<% if @reservation.present? %>
+  <h1>Confirmação de Reserva</h1>
+
+  <p><%= @inn.brand_name %></p>
+  <p><%= @room.name %></p>
+  <p>Check-in: <%= @reservation["arrive_date"].to_date.strftime("%d/%m/%y") %> - <%= @inn.check_in.strftime("%H:%M") %> | Check_out: <%= @reservation["leave_date"].to_date.strftime("%d/%m/%y") %> - <%= @inn.check_out.strftime("%H:%M") %></p>
+  <p>Diárias: <%= (@reservation["leave_date"].to_date - @reservation["arrive_date"].to_date).to_i %></p> 
+  <p>Valor total: R$<%= (@reservation["leave_date"].to_date - @reservation["arrive_date"].to_date).to_i * @room.price %></p> 
+  <p>Métodos de pagamento: <%= @inn.payment_methods %></p>
+
+
+  <% if guest_signed_in? %>
+    <%= button_to "Finalizar Reserva", "/confirmation", method: :post%>
+  <% else %>
+    <%= link_to 'Entre como Guest para confirmar sua reserva', new_guest_session_path %>
+  <% end %>
+<% else %>
+  <h1>Não há reservas para confirmar</h1>
+<% end %>

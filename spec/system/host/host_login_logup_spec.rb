@@ -6,11 +6,11 @@ describe 'Usuário faz login' do
     
     # Act
     visit root_path
-    click_on 'Entrar'
+    click_on 'Entrar Como Host'
     fill_in 'E-mail', with: 'joao@gmail.com' 
     fill_in 'Senha', with: '123456' 
     within('form#new_host') do
-      click_on 'Entrar'
+      click_on 'Log in'
     end
     
     # Assert
@@ -22,8 +22,8 @@ describe 'Usuário faz login' do
     
     # Act
     visit root_path
-    click_on 'Entrar'
-    click_on 'Cadastrar'
+    click_on 'Entrar Como Host'
+    click_on 'Sign up'
     within ('form#new_host') do
       fill_in 'Nome', with: 'João' 
       fill_in 'E-mail', with: 'joao@gmail.com' 
@@ -34,7 +34,7 @@ describe 'Usuário faz login' do
     # Assert
     expect(page).to have_content('Confirme sua senha não é igual a Senha')
     expect(page).to have_content('Não foi possível salvar anfitrião')
-    expect(page).to have_content('Criar conta')
+    expect(page).to have_content('Host Sign up')
   end
 
   it 'pela tela de cadastro com sucesso' do
@@ -42,8 +42,8 @@ describe 'Usuário faz login' do
     
     # Act
     visit root_path
-    click_on 'Entrar'
-    click_on 'Cadastrar'
+    click_on 'Entrar Como Host'
+    click_on 'Sign up'
     within ('form#new_host') do
       fill_in 'Nome', with: 'João' 
       fill_in 'E-mail', with: 'joao@gmail.com' 
@@ -63,8 +63,8 @@ describe 'Usuário faz login' do
     
     # Act
     visit root_path
-    click_on 'Entrar'
-    click_on 'Cadastrar'
+    click_on 'Entrar Como Host'
+    click_on 'Sign up'
     within ('form#new_host') do
       fill_in 'Nome', with: 'João' 
       fill_in 'E-mail', with: 'joao@gmail.com' 
@@ -88,11 +88,11 @@ describe 'Usuário faz login' do
     
     # Act
     visit root_path
-    click_on 'Entrar'
+    click_on 'Entrar Como Host'
     within ('form#new_host') do
       fill_in 'E-mail', with: 'joao@gmail.com' 
       fill_in 'Senha', with: '123456' 
-      click_on 'Entrar'
+      click_on 'Log in'
     end
     
     # Assert
@@ -108,7 +108,7 @@ describe 'Usuário faz login' do
     host = Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
     
     # Act
-    login_as(host)
+    login_as host, scope: :host
     visit root_path
     click_on 'Sair'
     

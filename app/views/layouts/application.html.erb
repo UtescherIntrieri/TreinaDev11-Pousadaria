@@ -10,28 +10,37 @@
   </head>
 
   <body>
-    <h1><%= link_to 'Pousadaria', root_path %></h1>
-    <nav>
-        <% if host_signed_in? %>
-          <%= link_to current_host.name, host_path(current_host.id) %>
-          <%= button_to 'Sair', destroy_host_session_path, method: :delete %>
-          <div>
-        <% else %>
-          <%= link_to 'Entrar', new_host_session_path %>
-          <h2>Buscar Pousadas</h2>
-            <%= form_with(url: search_inns_path, method: :get) do |f| %>
-              <%= f.label :brand_name, 'Nome' %>
-              <%= f.text_field :brand_name %>
-              <%= f.label :neighborhood, 'Bairro' %>
-              <%= f.text_field :neighborhood %>
-              <%= f.label :city, 'Cidade' %>
-              <%= f.text_field :city %>
-              <%= f.submit 'Buscar' %>
-            <% end %>
-          <%= link_to 'Busca avançada', adv_search_inns_path %>
-          </div>
+    <nav id= 'space-around-nowrap'>
+      <h1><%= link_to 'Pousadaria', root_path %></h1>
+      <div id= 'space-around'>
+        <%= form_with(url: search_inns_path, method: :get, html: {id: 'space-around-nowrap'}) do |f| %>
+          <%= f.text_field :brand_name, placeholder: "Nome" %>
+          <%= f.text_field :neighborhood, placeholder: "Bairro" %>
+          <%= f.text_field :city, placeholder: "Cidade" %>
+          <%= f.submit 'Buscar' %>
         <% end %>
-      </nav>
+        <%= link_to 'Busca avançada', adv_search_inns_path %>
+      </div>
+      <% if host_signed_in? %>
+        <div id= 'space-around'>
+          <p>Host: <%= link_to current_host.name, host_path(current_host.id) %></p>
+          <%= button_to 'Sair', destroy_host_session_path, method: :delete %>
+        </div>
+      <% elsif guest_signed_in? %>
+        <div id= 'space-around'>
+          <p>Guest: <%= link_to current_guest.name, guest_path(current_guest.id) %></p>
+          <%= button_to 'Sair', destroy_guest_session_path, method: :delete %>
+        </div>
+      <% else %>
+          <div>
+            <%= link_to 'Entrar Como Host', new_host_session_path %> <br>
+            <%= link_to 'Entrar Como Guest', new_guest_session_path %> <br>
+            <% if session[:res].present? %>
+              <%= link_to('Reserva à confirmar', confirmation_index_path) %>
+            <% end %>
+          </div>
+      <% end %>
+    </nav>
     <div>
       <%= alert %>
       <%= notice %>

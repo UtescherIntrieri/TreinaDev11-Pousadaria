@@ -13,7 +13,8 @@ describe 'Host vê página de detalhes de uma pousada' do
                 check_in: '13:00:00', check_out: '14:00:00', host_id: 1)
 
     # Act
-    login_as(host)
+        login_as host, scope: :host
+(host)
     visit(root_path)
     click_on('Pousada na floresta')
 
@@ -55,8 +56,9 @@ describe 'Host vê página de detalhes de uma pousada' do
                 pet_friendly: false, usage_policy: 'não fazer barulhos altos',
                 check_in: '15:00:00', check_out: '16:00:00', host_id: 2)
     
-    # Act
-    login_as(host)
+        login_as host, scope: :host
+
+    login_as host, scope: :host
     visit(root_path)
     click_on('Pousadinha')
     
@@ -88,9 +90,10 @@ describe 'Host vê página de detalhes de uma pousada' do
                 description: 'Uma pousada com muita natureza', payment_methods: 'Débito, Crédito, Pix e dinheiro',
                 pet_friendly: true, usage_policy: 'não fumar, limpar após o uso',
                 check_in: '13:00:00', check_out: '14:00:00', host_id: 1)
-    
+        login_as host, scope: :host
+
     # Act
-    login_as(host)
+    login_as host, scope: :host
     visit(root_path)
     click_on('Pousada na floresta')
     click_on 'Alterar Status'

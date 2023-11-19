@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
   root to: 'home#index'
+  devise_for :guests
   devise_for :hosts
   
+  resources :guests, only: [:show]
+
+  resources :confirmation, only: [:index, :create]
+
   resources :hosts, only: [:show] do
+    resources :reservations, only: [:index]
   end
   
   resources :inns, only: [:show, :new, :create, :edit, :update] do
@@ -15,6 +21,8 @@ Rails.application.routes.draw do
     resources :rooms, only: [:show, :new, :create, :edit, :update, :destroy] do
       patch :vacancy, on: :member
 
+      resources :reservations, only: [:show, :new, :create, :edit, :update]
+      
       resources :adjusted_prices, only: [:index, :show, :new, :create, :edit, :update, :destroy]
     end
   end

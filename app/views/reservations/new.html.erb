@@ -1,0 +1,30 @@
+  <% if(@reservation.errors.any?) %>
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+      <% @reservation.errors.messages.values.flatten.each do |msg|%>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+<%= form_with(model: [@inn, @room, @reservation], method: :post) do |f| %>
+  <div>
+    <%= f.label :arrive_date%>
+    <%= f.date_field :arrive_date, min: 1.day.from_now(Date.today)  %>
+  </div>
+  <div>
+    <%= f.label :leave_date%>
+    <%= f.date_field :leave_date, min: 2.day.from_now(Date.today) %>
+  </div>
+  <div>
+    <%= f.label :group_size%>
+    <%= f.number_field :group_size, min: 1, max: @room.capacity %>
+  </div>
+
+  <%= f.hidden_field :room_id, :value => @room.id %>
+  <%= f.hidden_field :code, :value => SecureRandom.alphanumeric(8).upcase %>
+
+  <div>
+    <%= f.submit 'Enviar' %>
+  </div>
+<% end %>

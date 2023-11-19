@@ -24,7 +24,7 @@ class AdjustedPricesController < ApplicationController
     @room = Room.find(params[:room_id])
     @adjusted_price = @room.adjusted_price.build(adjusted_price_params)
     if @adjusted_price.save()
-      redirect_to inn_room_path(@inn.id, @room.id), notice: 'Preço por periodo cadastrado com sucesso.' 
+      redirect_to inn_room_adjusted_prices_path(@inn.id, @room.id), notice: 'Preço por periodo cadastrado com sucesso.' 
     else
       flash.now[:notice] = 'Preço por periodo não cadastrado.' 
       render 'new'

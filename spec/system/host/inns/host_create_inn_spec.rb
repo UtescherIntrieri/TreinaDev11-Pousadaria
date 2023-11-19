@@ -6,7 +6,7 @@ describe 'Host acessa /inns/new' do
     host = Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
 
     # Act
-    login_as(host)
+    login_as host, scope: :host
     visit root_path
     fill_in 'Empresa', with: 'Pousadas Guaraú'
     fill_in 'Nome', with: 'Pousada na floresta'
@@ -39,7 +39,7 @@ describe 'Host acessa /inns/new' do
     host = Host.create!(name: 'João', email: 'joao@gmail.com', password: '123456')
     
     # Act
-    login_as(host)
+    login_as host, scope: :host
     visit root_path
     fill_in 'Empresa', with: ''
     fill_in 'Nome', with: ''
