@@ -1,1 +1,23 @@
 <h1>show reserva</h1>
+    <div>
+      <strong>Código:</strong>  <%= @reservation.code %> <br>
+      <strong>Quarto:</strong> <%= @reservation.room.name %> <br>
+      <strong>Pessoas:</strong> <%= @reservation.group_size %> pessoas <br>
+      <strong>Data de Entrada:</strong> <%= @reservation.arrive_date.strftime("%d/%m/%y") %> <br>
+      <strong>Data de Saída:</strong> <%= @reservation.leave_date.strftime("%d/%m/%y") %> <br>
+      <strong>Status:</strong> <%= @reservation.status %> <br>
+
+      <% if @reservation.pending? && Time.now >= @reservation.arrive_date %>
+        <%= button_to "Fazer Check-in", activate_inn_room_reservation_path(@inn.id, @room.id, @reservation.id), { method: 'patch' } %>
+      <% elsif @reservation.active? %>
+        <strong>Check-in realizado em:</strong> <%= @reservation.arrived_at %> <br>
+        <%= button_to "Fazer Check-out", finish_inn_room_reservation_path(@inn.id, @room.id, @reservation.id), { method: 'patch' } %>
+      <% elsif @reservation.finished? %>
+        <strong>Check-in realizado em:</strong> <%= @reservation.arrived_at %> <br>
+        <strong>Check-out realizado em:</strong> <%= @reservation.left_at %> <br>
+      <% end %>
+      
+      <% if @reservation.pending? && Time.now >= @reservation.arrive_date + 2.days %>
+        <%= button_to "Cancelar", cancel_inn_room_reservation_path(@inn.id, @room.id, @reservation.id), { method: 'patch' } %>
+      <% end %>
+    </div>

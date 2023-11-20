@@ -6,6 +6,7 @@ class ConfirmationController < ApplicationController
   end
   
   def create
+    time_overlap
     @inn = Inn.find(session[:i])
     @room = Room.find(session[:r])
     @reservation = session[:res]

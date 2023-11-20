@@ -21,8 +21,12 @@ Rails.application.routes.draw do
     resources :rooms, only: [:show, :new, :create, :edit, :update, :destroy] do
       patch :vacancy, on: :member
 
-      resources :reservations, only: [:show, :new, :create, :edit, :update]
-      
+      resources :reservations, only: [:show, :new, :create, :edit, :update] do
+        patch :activate, on: :member
+        patch :cancel, on: :member
+        patch :finish, on: :member
+      end
+
       resources :adjusted_prices, only: [:index, :show, :new, :create, :edit, :update, :destroy]
     end
   end
