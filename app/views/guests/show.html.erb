@@ -7,11 +7,13 @@
 <% if @reservations.present? %>
   <% @reservations.each do |reservation| %>
     <div>
+      <strong>Código:</strong> <%= link_to(reservation.code, inn_room_reservation_path(reservation.room.inn_id, reservation.room_id, reservation.id)) %> <br>
       <strong>Pousada:</strong> <%= reservation.room.inn.brand_name %> <br>
       <strong>Quarto:</strong> <%= reservation.room.name %> <br>
       <strong>Pessoas:</strong> <%= reservation.group_size %> pessoas <br>
       <strong>Data de Entrada:</strong> <%= reservation.arrive_date.strftime("%d/%m/%y") %> <br>
       <strong>Data de Saída:</strong> <%= reservation.leave_date.strftime("%d/%m/%y") %> <br>
+      <strong>Preço Total:</strong> <%= reservation.total_price %> <br>
       <strong>Status:</strong> <%= reservation.status %> <br>
     </div>
   <% end %>

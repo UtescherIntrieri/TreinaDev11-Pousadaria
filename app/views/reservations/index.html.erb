@@ -1,5 +1,25 @@
 <h1><%= @inn.brand_name %> - Reservas</h1>
 
+<h2>Reservas Ativas</h2>
+<% if @reservations.active.any? %>
+  <div id='space-around'>
+    <% @reservations.active.each do |reservation| %>
+      <div>
+        <strong>Código:</strong>  <%= link_to(reservation.code, inn_room_reservation_path(@inn.id, reservation.room_id, reservation.id)) %> <br>
+        <strong>Quarto:</strong> <%= reservation.room.name %> <br>
+        <strong>Pessoas:</strong> <%= reservation.group_size %> pessoas <br>
+        <strong>Data de Entrada:</strong> <%= reservation.arrive_date.strftime("%d/%m/%y") %> <br>
+        <strong>Data de Saída:</strong> <%= reservation.leave_date.strftime("%d/%m/%y") %> <br>
+        <strong>Status:</strong> <%= reservation.status %> <br>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>Não há reservas ativas</p>
+<% end %>
+
+
+<h2>Outras Reservas</h2>
 <div id='space-around'>
   <% @reservations.each do |reservation| %>
     <div>

@@ -12,17 +12,22 @@ class ReservationsController < ApplicationController
     @inn = Inn.find(params[:inn_id])
     @room = Room.find(params[:room_id])
     @reservation = Reservation.find(params[:id])
+    if host_signed_in? || guest_signed_in?
+      unless current_guest.id == @reservation.guest_id || current_host.id == @reservation.room.host_id 
+        redirect_to root_path
+      end
+    else
+      redirect_to root_path
+    end
   end
   
   def new
-    time_overlap
     @inn = Inn.find(params[:inn_id])
     @room = Room.find(params[:room_id])
     @reservation = @room.reservation.build()
   end
 
   def create
-    time_overlap
     @inn = Inn.find(params[:inn_id])
     @room = Room.find(params[:room_id])
     @reservation = @room.reservation.build(reservation_params)
@@ -47,7 +52,7 @@ class ReservationsController < ApplicationController
     @inn = Inn.find(params[:inn_id])
     @room = Room.find(params[:room_id])
     @reservation = Reservation.find(params[:id])
-    if @reservation.pending? && Time.now >= @reservation.arrive_date
+    if @reservation.pending? && Time.now >= @reservation.arrive_date && current_host.id == @inn.host_id?
       @reservation.arrived_at = Time.now
       @reservation.active!
     end
@@ -57,9 +62,21 @@ class ReservationsController < ApplicationController
   def finish
     @inn = Inn.find(params[:inn_id])
     @room = Room.find(params[:room_id])
+    @adjusted_prices = AdjustedPrice.all.where(inn_id: @inn.id).where(room_id: @room.id)
     @reservation = Reservation.find(params[:id])
-    if @reservation.active?
+    if @reservation.active && current_host.id == @inn.host_id?
       @reservation.left_at = Time.now
+
+      @reservation.total_price = (@reservation.left_at.to_date - @reservation.arrive_date.to_date).to_i * @room.price
+      range1 = Range.new(@reservation.arrive_date, @reservation.left_at) 
+      (@reservation.arrive_date..@reservation.left_at).first((@reservation.left_at.to_date - @reservation.arrive_date.to_date).to_i).each do |date| 
+        @adjusted_prices.each do |ap| 
+          range2 = Range.new(ap.start_date, ap.end_date) 
+          if date.to_date.between?(ap.start_date, ap.end_date) 
+            @reservation.total_price += ap.price - @room.price
+          end 
+        end 
+      end 
       @reservation.finished!
     end
     redirect_to inn_room_reservation_path(@inn.id, @room.id, @reservation.id)
@@ -69,7 +86,7 @@ class ReservationsController < ApplicationController
     @inn = Inn.find(params[:inn_id])
     @room = Room.find(params[:room_id])
     @reservation = Reservation.find(params[:id])
-    if @reservation.pending? && Time.now >= @reservation.arrive_date + 2.days
+    if @reservation.pending?
       @reservation.cancel!
     end
     redirect_to inn_room_reservation_path(@inn.id, @room.id, @reservation.id)

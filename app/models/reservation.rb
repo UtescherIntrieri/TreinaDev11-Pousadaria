@@ -1,4 +1,5 @@
 class Reservation < ApplicationRecord
+  validate :time_overlap
   enum status: { cancelled: 0, pending: 1, active: 2, finished: 3 }
   belongs_to :room
 
