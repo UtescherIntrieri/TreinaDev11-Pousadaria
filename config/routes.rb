@@ -37,7 +37,11 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :inns, only: [:show, :index]
+      resources :inns, only: [:show, :index] do
+        resources :rooms, only: [:show, :index] do
+          get 'check', on: :member
+        end
+      end
     end
   end
 end
