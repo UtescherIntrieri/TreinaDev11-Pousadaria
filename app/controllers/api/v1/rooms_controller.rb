@@ -34,14 +34,16 @@ class Api::V1::RoomsController < ActionController::API
         end
       end
     end
-    test = @reservation.total_price * @reservation.group_size
-    test2 = "nao"
+    result = {
+      "arrive_date" => @reservation.arrive_date,
+      "leave_date" => @reservation.leave_date,
+      "group_size" => @reservation.group_size,
+      "total_price" => @reservation.total_price * @reservation.group_size
+    }
     if @reservation.valid?
-      render status: 200, json: test.as_json(except: [:created_at, :updated_at])
+      render status: 200, json: result.as_json(except: [:created_at, :updated_at])
     else
-      render json: {
-        :errors => @reservation.errors
-      }, status: 400
+      render json: {:errors => @reservation.errors}, status: 400
     end
   end
 end

@@ -14,7 +14,7 @@ class Api::V1::InnsController < ActionController::API
         avg_rating = ""
       end
       final_view = [inn, {"average_rating" => avg_rating}]
-      render status: 200, json: final_view.as_json(except: [:created_at, :updated_at, :registration_number, :brand_name])
+      render status: 200, json: final_view.as_json(except: [:created_at, :updated_at, :registration_number, :corporate_name])
     rescue
       render status: 404
     end
@@ -22,7 +22,7 @@ class Api::V1::InnsController < ActionController::API
   
   def index
     inns = Inn.active
-    inns = inns.where("inns.brand_name LIKE ?", "%#{params[:brand_name]}") if params[:brand_name].present?
-    render status: 200, json: inns.as_json(except: [:created_at, :updated_at, :registration_number, :brand_name])
+    inns = inns.where("inns.brand_name LIKE ?", "%#{params[:brand_name]}%") if params[:brand_name].present?
+    render status: 200, json: inns.as_json(except: [:created_at, :updated_at, :registration_number, :corporate_name])
   end
 end
