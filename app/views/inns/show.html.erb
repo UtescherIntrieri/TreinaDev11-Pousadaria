@@ -47,4 +47,21 @@
   </div>
 <% end %>
 
+<br>
+<br>
+<br>
+
+<% if @res.any? %>
+  <h3 id='space-around'>Últimas 3 Avaliações</h3>
+  <div id='space-around'>
+    <% @res.each do |r| %>
+      <div>
+        <strong>Nota:</strong> <%= r.rating %> <br>
+        <strong>Comentário:</strong> <%= r.comment %> <br>
+      </div>
+    <% end %>
+  </div>
+  <%= link_to("Ver todas avaliações", inn_reviews_inn_path(@inn.id))%>
+<% end %>
+
 <div><%= link_to('Voltar', root_path) %></div>

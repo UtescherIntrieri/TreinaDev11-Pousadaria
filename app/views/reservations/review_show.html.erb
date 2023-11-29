@@ -1,0 +1,16 @@
+<h1>Avaliação</h1>
+
+<strong>Código:</strong>  <%= @reservation.code %> <br>
+<strong>Quarto:</strong> <%= @reservation.room.name %> <br>
+<strong>Nota:</strong> <%= @reservation.rating %> <br>
+<strong>Comentário:</strong> <%= @reservation.comment %> <br>
+
+<%= form_with(model: [@inn, @room, @reservation], url: "/inns/#{@inn.id}/rooms/#{@room.id}/reservations/#{@reservation.id}", method: :put) do |f| %>
+    <div>
+      <%= f.label :response %>
+      <%= f.text_field :response %>
+    </div>
+    <div>
+      <%= f.submit 'Enviar' %>
+    </div>
+  <% end %>

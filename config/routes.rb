@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   resources :confirmation, only: [:index, :create]
 
   resources :hosts, only: [:show] do
-    resources :reservations, only: [:index]
+    get 'review_index', on: :member
+    resources :reservations, only: [:index] do
+      get 'review_show', on: :member
+    end
   end
   
   resources :inns, only: [:show, :new, :create, :edit, :update] do
@@ -16,6 +19,7 @@ Rails.application.routes.draw do
     get 'city_search', on: :collection
     get 'search', on: :collection
     get 'adv_search', on: :collection
+    get 'inn_reviews', on: :member
     
     
     resources :rooms, only: [:show, :new, :create, :edit, :update, :destroy] do
@@ -28,6 +32,12 @@ Rails.application.routes.draw do
       end
 
       resources :adjusted_prices, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+    end
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :inns, only: [:show, :index]
     end
   end
 end

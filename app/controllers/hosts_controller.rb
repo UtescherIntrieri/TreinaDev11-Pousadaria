@@ -8,4 +8,11 @@ class HostsController < ApplicationController
     redirect_to(root_path) unless host_signed_in? && current_host.id == @host.id
   end
 
+  def review_index
+    @host = Host.find(params[:id])
+    @inn =  Inn.find_by host_id: @host.id
+    @rooms = Room.all.where(inn_id: @inn.id) if @inn.present?
+    @reservations = Reservation.all.where(room_id: @rooms.ids)
+  end
+
 end

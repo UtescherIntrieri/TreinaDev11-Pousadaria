@@ -1,0 +1,15 @@
+<h1>Avaliações da minha pousada</h1>
+
+<div id='space-around'>
+  <% @reservations.each do |reservation| %>
+    <% if reservation.rating.present? || reservation.comment.present? %>
+      <div>
+        <strong>Código:</strong>  <%= link_to(reservation.code,  review_show_host_reservation_path(@host.id, reservation.id)) %> <br>
+        <strong>Quarto:</strong> <%= reservation.room.name %> <br>
+        <strong>Nota:</strong> <%= reservation.rating %> <br>
+        <strong>Comentário:</strong> <%= reservation.comment %> <br>
+        <strong>Resposta:</strong> <%= reservation.response %> <br>
+      </div>
+    <% end %>
+  <% end %>
+</div>

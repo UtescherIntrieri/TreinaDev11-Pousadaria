@@ -1,0 +1,10 @@
+<h1>Todas as Avaliações</h1>
+
+<div id='space-around'>
+    <% @res.each do |r| %>
+      <div>
+        <strong>Nota:</strong> <%= r.rating %> <br>
+        <strong>Comentário:</strong> <%= r.comment %> <br>
+      </div>
+    <% end %>
+  </div>

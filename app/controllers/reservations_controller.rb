@@ -43,9 +43,27 @@ class ReservationsController < ApplicationController
   end
 
   def edit
+    @inn = Inn.find(params[:inn_id])
+    @room = Room.find(params[:room_id])
+    @reservation = @room.reservation.build()
   end
 
   def update
+    @inn = Inn.find(params[:inn_id])
+    @host = Host.find(@inn.host_id)
+    @room = Room.find(params[:room_id])
+    @reservation = Reservation.find(params[:id])
+    if @reservation.update reservation_params
+      @reservation.save
+      if guest_signed_in?
+        redirect_to inn_room_reservation_path(@inn.id, @room.id, @reservation.id), notice: 'Avaliação enviada com sucesso.' 
+      elsif host_signed_in?
+        redirect_to review_show_host_reservation_path(@host.id, @reservation.id), notice: 'Resposta enviada com sucesso.' 
+      end
+    else
+      flash.now[:notice] = 'Avaliação não enviada.' 
+      render 'reservations/show'
+    end
   end
 
   def activate
@@ -86,15 +104,23 @@ class ReservationsController < ApplicationController
     @inn = Inn.find(params[:inn_id])
     @room = Room.find(params[:room_id])
     @reservation = Reservation.find(params[:id])
-    if @reservation.pending?
-      @reservation.cancel!
+    if @reservation.pending? && ((host_signed_in? && Time.now >= @reservation.arrive_date + 2.days) || (guest_signed_in? && Time.now <= @reservation.arrive_date - 7.days))
+    @reservation.cancel!
     end
     redirect_to inn_room_reservation_path(@inn.id, @room.id, @reservation.id)
   end
-  
+
+  def review_show
+    @host = Host.find(params[:host_id])
+    @inn =  Inn.find_by host_id: @host.id
+    @reservation = Reservation.find(params[:id])
+    @room = Room.find_by id: @reservation.room_id if @inn.present?
+  end
+
+
   private
 
   def reservation_params
-    reservation_params = params.require(:reservation).permit(:room_id, :group_size, :arrive_date, :leave_date, :code)
+    reservation_params = params.require(:reservation).permit(:room_id, :group_size, :arrive_date, :leave_date, :code, :rating, :comment, :response)
   end
 end

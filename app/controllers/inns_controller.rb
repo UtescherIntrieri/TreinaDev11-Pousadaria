@@ -1,9 +1,11 @@
 class InnsController < ApplicationController
-  before_action :set_inn, only: [:show, :edit, :update]
+  before_action :set_inn, only: [:show, :edit, :update, :inn_reviews]
   before_action :force_create_inn, except: [:new, :create, :edit, :update]
 
   def show
     @rooms = Room.vacant.where(inn_id: @inn.id)
+    @reservations = Reservation.where.not(rating: nil)
+    @res = @reservations.where(room_id: @rooms.ids).last(3)
   end
 
   def new
@@ -89,6 +91,12 @@ class InnsController < ApplicationController
   def adv_search
     @rooms = Room.vacant
     @inns = Inn.active
+  end
+
+  def inn_reviews
+    @rooms = Room.vacant.where(inn_id: @inn.id)
+    @reservations = Reservation.where.not(rating: nil)
+    @res = @reservations.where(room_id: @rooms.ids)
   end
 
   private

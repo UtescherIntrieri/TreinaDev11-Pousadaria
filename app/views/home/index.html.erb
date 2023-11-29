@@ -18,6 +18,18 @@
           <h3><%= link_to(inn.brand_name, inn) %></h3>
           <h4><%= inn.city %> - <%= inn.state %></h4>
           <h4>Quartos Disponíveis: <%= @rooms.where(inn_id: inn.id).length %></h4>
+          <% @r = @rooms.where(inn_id: inn.id) %>
+          <% @res = @reservations.where(room_id: @r.ids) %>
+            <% @avg_rating = 0 %>
+          <% @res.each do |r| %>
+            <% @avg_rating += r.rating %>
+            <% @avg_rating == @avg_rating/(@res.length) %>
+          <% end %>
+          <% if @res.any? %>
+            <h4>Nota média: <%= @avg_rating %></h4>
+          <% else %>
+            <h4>Nenhuma Avaliação</h4>
+          <% end %>
         </div>
       <% end %>
     </div>
@@ -29,6 +41,18 @@
           <h3><%= link_to(inn.brand_name, inn) %></h3>
           <h4><%= inn.city %> - <%= inn.state %></h4>
           <h4>Quartos Disponíveis: <%= @rooms.where(inn_id: inn.id).length %></h4>
+          <% @r = @rooms.where(inn_id: inn.id) %>
+          <% @res = @reservations.where(room_id: @r.ids) %>
+            <% @avg_rating = 0 %>
+          <% @res.each do |r| %>
+            <% @avg_rating += r.rating %>
+            <% @avg_rating == @avg_rating/(@res.length) %>
+          <% end %>
+          <% if @res.any? %>
+            <h4>Nota média: <%= @avg_rating %></h4>
+          <% else %>
+            <h4>Nenhuma Avaliação</h4>
+          <% end %>
         </div>
       <% end %>
       
