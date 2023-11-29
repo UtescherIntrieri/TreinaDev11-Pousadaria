@@ -203,21 +203,18 @@
         <details>
         <summary><i>Se a reserva for validada com sucesso, os parâmetros e o valor total são retornados:</i></summary>
           
-          ```
           {
             "arrive_date": "2025-01-01",
             "leave_date": "2025-01-12", 
             "group_size": 2,                
             "total_price": 2560   # Valor total dessa reserva (já calculado com os possíveis preços por periodo)
           }
-          ```
-  
+
         </details>
 
         <details>
           <summary><i>Se a reserva não for validada com sucesso é retornado um objeto com os erros do model:</i></summary>
          
-          ```
           {
             "errors": {
               "arrive_date": [
@@ -226,7 +223,6 @@
               ]
             }
           }    # Nesse caso há duas reservas em que as datas coincidem com a reserva a ser validada
-          ```
   
         </details>
 #
